@@ -37,15 +37,18 @@
     <div class="panel panel-default">
       <div class="panel-heading">Monthly Payment</div>
       <div class="panel-body text-center">
-        <span style="font-size:2em;">{{format-number payment format="$0,0.00"}}</span>
+        <span style="font-size:2em;">{{format-number totalPayment format="$0,0.00"}}</span>
       </div>
     </div>
   </div>
   <div class="col-md-2">
-    <div class="panel panel-default">
+    <div class="panel {{if (gt savedInterest 0) 'panel-success' 'panel-default'}}">
       <div class="panel-heading">Total Interest</div>
       <div class="panel-body text-center">
-        <span style="font-size:2em;">{{format-number totalInterest format="$0,0.00"}}</span>
+        <span style="font-size:2em;">{{format-number totalInterestPaid format="$0,0.00"}}</span>
+        {{#if (gt savedInterest 0)}}
+          <br>{{format-number savedInterest format="$0,0.00"}} saved
+        {{/if}}
       </div>
     </div>
   </div>
@@ -57,8 +60,14 @@
       </div>
     </div>
   </div>
-  Total paid {{format-number totalPaid format="$0,0.00"}} <br>
-  (Total interest paid {{format-number totalInterestPaid format="$0,0.00"}}) <br>
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">Total paid</div>
+      <div class="panel-body text-center">
+        <span style="font-size:2em;">{{format-number totalPaid format="$0,0.00"}}</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <table class="table table-striped">
