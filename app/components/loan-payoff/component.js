@@ -53,5 +53,29 @@ export default Ember.Component.extend({
   totalPaid: Ember.computed('payments.[]', function() {
     let payments = this.get('payments');
     return _math.sum(payments, 'payment') + _math.sum(payments, 'extra');
+  }),
+
+  totalInterest: Ember.computed('loanAmount', 'loanTerm', 'interestRate', function() {
+    let principle = this.get('loanAmount'),
+        compoundingRate = this.get('compoundingRate'),
+        term = this.get('loanTerm'),
+        payment = this.get('payment'),
+        total = 0,
+        interest;
+    while (principle > 0) {
+      interest = _math.round(principle * compoundingRate, 2);
+
+      if(principle + interest < payment) {
+        payment = principle + interest;
+      }
+      principle = _math.round(principle + interest - payment, 2);
+      total = total + interest;
+    }
+    return total;
+  }),
+
+  totalInterestPaid: Ember.computed('payments.[]', function() {
+    let payments = this.get('payments');
+    return _math.sum(payments, 'interest');
   })
 });

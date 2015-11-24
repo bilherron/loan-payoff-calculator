@@ -33,9 +33,32 @@
 </div>
 
 <div class="row">
-  Monthly Payment {{format-number payment format="$0,0.00"}} <br>
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">Monthly Payment</div>
+      <div class="panel-body text-center">
+        <span style="font-size:2em;">{{format-number payment format="$0,0.00"}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">Total Interest</div>
+      <div class="panel-body text-center">
+        <span style="font-size:2em;">{{format-number totalInterest format="$0,0.00"}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">Loan Length</div>
+      <div class="panel-body text-center">
+        <span style="font-size:2em;">{{years payments.length}}</span>
+      </div>
+    </div>
+  </div>
   Total paid {{format-number totalPaid format="$0,0.00"}} <br>
-  Number of payments {{payments.length}} ({{years payments.length}})
+  (Total interest paid {{format-number totalInterestPaid format="$0,0.00"}}) <br>
 </div>
 
 <table class="table table-striped">
