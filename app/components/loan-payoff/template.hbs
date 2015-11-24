@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="form-group col-md-2">
+    <label>Amount</label><br>
+    <div class="input-group">
+      <div class="input-group-addon">$</div>
+      {{input value=loanAmount class="form-control"}}
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label>Interest Rate</label><br>
+    <div class="input-group">
+      {{input value=interestRate class="form-control"}}
+      <div class="input-group-addon">%</div>
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label>Term</label><br>
+    <div class="input-group">
+      {{input value=loanTerm class="form-control"}}
+      <div class="input-group-addon">months</div>
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label>Extra Monthly</label><br>
+    <div class="input-group">
+      <div class="input-group-addon">$</div>
+      {{input value=extraPrinciple class="form-control"}}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  Monthly Payment {{format-number payment format="$0,0.00"}} <br>
+  Total paid {{format-number totalPaid format="$0,0.00"}} <br>
+  Number of payments {{payments.length}}
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="text-center">Payment</th>
+      <th class="text-right">Starting</th>
+      <th class="text-center">+</th>
+      <th class="text-right">Interest</th>
+      <th class="text-center">-</th>
+      <th class="text-right">Payment</th>
+      <th class="text-center">-</th>
+      <th class="text-right">Extra</th>
+      <th class="text-center">=</th>
+      <th class="text-right">Ending Balance</th>
+      <th class="text-right"></th>
+    </tr>
+  </thead>
+  <tbody>
+{{#each payments as |payment|}}
+  <tr>
+    <td class="text-center">{{payment.id}}</td>
+    <td class="text-right">{{format-number payment.startingPrinciple format="$0,0.00"}}</td>
+    <td>&nbsp;</td>
+    <td class="text-right">{{format-number payment.interest format="$0,0.00"}}</td>
+    <td>&nbsp;</td>
+    <td class="text-right">{{format-number payment.payment format="$0,0.00"}}</td>
+    <td>&nbsp;</td>
+    <td class="text-right">{{format-number payment.extra format="$0,0.00"}}</td>
+    <td>&nbsp;</td>
+    <td class="text-right">{{format-number payment.principle format="$0,0.00"}}</td>
+    <td class="text-right"></td>
+  </tr>
+{{/each}}
+  </tbody>
+</table>
+
+
+{{yield}}
