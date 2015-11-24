@@ -14,8 +14,7 @@ export default Ember.Component.extend({
   payment: Ember.computed('loanAmount', 'loanTerm', 'interestRate', function() {
     let loanAmount = this.get('loanAmount'),
         loanTerm = this.get('loanTerm'),
-        compoundingRate = this.get('compoundingRate'),
-        extra = this.get('extraPrinciple');
+        compoundingRate = this.get('compoundingRate');
 
     if(+compoundingRate === 0) {
       return _math.round(loanAmount / loanTerm, 2);
